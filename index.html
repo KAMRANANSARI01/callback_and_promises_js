@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Callback and Promises</title>
+  </head>
+  <body>
+    <script>
+      //callbacks-
+      //we have to do some task in the given direction. line by line .
+      // 1.Register
+      // 2.Send welcome Email.
+      // 3.login
+      // 4.get user data
+      // 5.display user data
+
+      // function register(){
+      //     console.log("register done.")
+      // }
+      // function email(){
+      //     console.log("email sent")
+      // }
+      // function login(){
+      //     console.log("login complete")
+      // }
+      // function getUserData(){
+      //     console.log("got user data")
+      // }
+      // function displayUserData(){
+      //     console.log("user data displayed")
+      // }
+
+      // register()
+      // email()
+      // login()
+      // getUserData()
+      // displayUserData()
+
+      // console.log("Other application work!")
+      // ye method sycronus hai ...
+
+      //asyncornus method following...sb funciton alg alg time lega pe fir bhi hme line by line hi execute krana hai to callback kause krege.
+
+        function register(callback) {
+          setTimeout(() => {
+            console.log("register done.");
+            callback();
+          }, 3000);
+        }
+      //   //ab register function higher order function ban gay hai kuki  usme humne callback function ko as a parameter pass kiya hai...
+        // function email(callback) {
+        //   setTimeout(() => {
+        //     console.log("email sent");
+        //     callback();
+        //   }, 2000);
+        // }
+        // function login(callback) {
+        //   setTimeout(() => {
+        //     console.log("login complete");
+        //     callback()
+        //   }, 1000);
+        // }
+        // function getUserData(callback) {
+        //   setTimeout(() => {
+        //     console.log("got user data");
+        //     callback()
+        //   }, 1000);
+        // }
+        // function displayUserData() {
+        //   setTimeout(() => {
+        //     console.log("user data displayed");
+        //     // callback()
+        //   }, 1000);
+        // }
+      // //   // callback function banana
+
+      // //callback hell...ye phle use hota tha ab promises use hota hai
+        // register(function () {
+        //   email(function () {
+        //     login(function () {
+        //       getUserData(function () {
+        //         displayUserData();
+        //       });
+        //     });
+        //   });
+        // });
+
+      // //   console.log("Other application work!");
+
+      // //is trh se hum line by line function execute kara ssakte hai but is trh se kerne pe function complecated ho jata hai to hum promises ka use krte hai..
+
+      function register() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log("register done.");
+            resolve();
+          }, 1000);
+        });
+      }
+      function email() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log("email sent");
+            resolve();
+          }, 6000);
+        });
+      }
+      function login() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log("login complete");
+            resolve();
+          }, 1000);
+        });
+      }
+      function getUserData() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log("got user data");
+            resolve();
+          }, 5000);
+        });
+      }
+      function displayUserData() {
+        return new Promise((resolve,reject)=>{
+            setTimeout(() => {
+          console.log("user data displayed");
+          resolve()
+        }, 4000);
+        })
+    
+      }
+      function welldone(){
+        return new Promise((resolve,reject)=>{
+          setTimeout(()=>{
+            console.log("Well Done!");
+            resolve()
+          },4000);
+        })
+      }
+      console.log("Other application work!");
+      // promise call krna
+      // register()
+      //   .then(email)
+      //   .then(login)
+      //   .then(getUserData)
+      //   .then(displayUserData)
+      //   .then(welldone);
+      //aese promise likhne se function hmesha isi line me execute hoga bhle vo kitna bhi vqt le.
+
+      //now we have a another method async await method ..
+
+    
+      async function authentication(){
+        await register();
+        await email();
+        await login();
+        await getUserData();
+        await displayUserData();
+        await welldone();
+      }
+      authentication()//bcz this authentication function also return promises so we can add then method ..
+
+    // authentication().then(()=>{
+    //     console.log("All set!")
+    // })
+  
+    </script>
+  </body>
+</html>
